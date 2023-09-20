@@ -32,6 +32,7 @@
             font-weight: bold;
             display: block;
             margin-bottom: 10px;
+            color: #555; /* 修改标签颜色 */
         }
         input {
             width: 100%;
@@ -48,15 +49,15 @@
         li {
             margin: 5px 0;
             font-size: 18px;
-            color: #333;
+            color: #555; /* 修改结果列表颜色 */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>工资单位换算器</h1>
+        <h1 style="color: #3498db;">工资单位换算器</h1>
         <label for="rmbInput">请输入你的工资：</label>
-        <input type="number" id="rmbInput" placeholder="请输入你的工资" oninput="calculateUnits()">
+        <input type="number" id="rmbInput" placeholder="请输入你的工资" oninput="calculateUnits()" style="width: 80%; /* 调整输入框宽度 */">
         <h2>换算结果：</h2>
         <ul id="resultList">
         </ul>
