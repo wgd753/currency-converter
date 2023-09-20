@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人民币单位换算计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            font-size: 24px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>工资单位换算器</h1>
+        <label for="rmbInput">请输入你的工资：</label>
+        <input type="number" id="rmbInput" placeholder="请输入你的工资" oninput="calculateUnits()">
+        <h2>换算结果：</h2>
+        <ul id="resultList">
+        </ul>
+    </div>
+
+    <script>
+        function calculateUnits() {
+            const rmbValue = parseFloat(document.getElementById("rmbInput").value);
+
+            const ratios = {
+                "花西币": 79,
+                "爽币": 6.4e8,
+                "伦币": 1.06e8,
+                "薇币": 13.41e8,
+                "冰币": 8.84e8,
+                "梨币": 6555e4,
+                "妍币": 97.8e4,
+                "芒币": 650,
+                "庭币": 118e8
+            };
+
+            const resultList = document.getElementById("resultList");
+            resultList.innerHTML = "";
+
+            for (const unit in ratios) {
+                const unitValue = rmbValue / ratios[unit];
+                let displayedValue;
+
+                if (isNaN(unitValue)) {
+                    // 如果数值为空或非法，则不显示
+                    continue;
+                } else if (unitValue === 0) {
+                    // 如果数值为0，则显示空字符串
+                    displayedValue = "";
+                } else {
+                    // 如果数值非零，则显示至多10位小数
+                    displayedValue = unitValue.toFixed(10).replace(/\.?0+$/, ''); // 去掉末尾的零
+                }
+
+                const listItem = document.createElement("li");
+                listItem.textContent = displayedValue + " " + unit;
+                resultList.appendChild(listItem);
+            }
+        }
+    </script>
+</body>
+</html>
